@@ -1,0 +1,31 @@
+--- 
+title: "Biological Aspects of Biodanza"
+author: "Lieven Clement"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+fontsize: 11pt
+linkcolor: blue
+urlcolor: blue 
+citecolor: blue
+output: 
+  bookdown::gitbook:
+    toc_depth: 3
+  bookdown::pdf_book:
+    toc_depth: 3
+    toccolor: blue
+documentclass: book
+link-citations: yes
+bibliography: [bibliography.bib]
+biblio-style: apalike
+always_allow_html: true
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+
+#bookdown::render_book("index.Rmd", "bookdown::gitbook")
+```
+

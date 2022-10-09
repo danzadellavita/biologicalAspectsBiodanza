@@ -1,0 +1,143 @@
+
+# Ontogenesis
+
+In the middle of the model, we see the biological aspect "ontogenesis" indicated with the red box in Figure \@ref(fig:modelOnto), which is our focus in this chapter.  
+
+```{r modelOnto, fig.cap='Model of Biodanza and Ontogenesis', out.width='50%', fig.asp=.8, fig.align='center', echo=FALSE}
+knitr::include_graphics("./figs/biologischeAspectenBiodanzaDeelIII.png")
+```
+
+
+The ontogenesis is the development of an organism from a fertilized egg cell up to the adult stage until we eventually die. 
+We all start from the genetic potential we inherit from our parents through their egg and sperm cell. 
+
+The fertilized egg cell then starts to divide and at a certain point the cells start to differentiate into different tissues.
+Each of our cells, apart from our germ cells, has the same genetic material!
+
+A first question that arises is how cells of different tissues of the same organism that share the same genetic code can be morphologically so distinct? This is due to epigenetics! 
+
+## Epigenetics
+
+Epigenetics is the study of how development, behavior and environment can cause changes that affect the way we use our genes. Unlike genetic changes, epigenetic changes are reversible and do not change your DNA sequence, but they can change how our body can (or cannot) read a DNA sequence, see Figure \@ref(fig:epigenetics). 
+
+```{r epigenetics, fig.cap='Principes of epigenetics. Small molecules, epigenetic markers, interact with the DNA and histones. They can cause a gene to be accessible or inaccessible for RNA transcription (Source: NIH, Wikipedia)', out.width='100%', fig.asp=.8, fig.align='center', echo=FALSE}
+knitr::include_graphics("./figs/Epigenetic_mechanisms.png")
+```
+
+
+Epigenetic markers, however, are copied during cell division to the two new cells that are formed. This causes a liver cell to remain a liver cell and a brain cell to remain a brain cell upon cell division.  
+
+Epigenetic markers are small molecules that either interact directly with the DNA or through histones, proteins that act as spools that wind the long DNA molecule in a more compact/condense form. 
+They can make genes accessible or inaccessible for RNA transcription and thus eventually for the production of proteins. Two common types are 
+
+- DNA methylation, binding a methyl or -CH$_3$ group, consisting of one carbon and three hydrogen atoms, directly to DNA.
+- Histone acetylation: adding an acetyl group or -CO-CH$_3$ group, consisting of two carbon, one oxygen and three hydrogen atoms, to histone proteins. Adding a group to a protein after translation is also referred to as post translational modification (PTM). 
+
+Both types can impact the activity of genes.
+On the one hand DNA methylation actively represses the expression of a specific gene, while DNA demethylation enhances gene expression. 
+On the other hand histone acetylation makes the structure of a region of DNA more open and thus more accessible for transcription of the genes in that region, while de-acetylation has the opposite effect.  
+
+## Epigenetics during Embryonal Development
+
+Epigenetics plays an important role in embryonic development (see Figure \@ref(fig:epiEmbryo)). 
+
+(ref:epiEmbryoLab) Epigenetics in embryo genesis at CpG islands, regions that can bind with many methyl groups. All CpG islands of a sperm cell are almost fully methylated. That of an egg cell are methylated around 50%. Upon fertilization the methylation drops and almost all genes become accessible for the undifferentiated blastula. As differentiation evolves and tissues get specific functions methylation increases again (Source: Mariuswalter, Wikipedia)
+
+```{r epiEmbryo, fig.cap='(ref:epiEmbryoLab)', out.width='100%', fig.asp=.8, fig.align='center', echo=FALSE}
+knitr::include_graphics("./figs/DNA_methylation_reprogramming.png")
+```
+
+CpG islands are regions in our DNA that can be heavily methylated. All CpG islands of a sperm cell are almost fully methylated and few genes are accessible. Indeed, a sperm cell has one main function and that is to swim forward.   The CpG islands of an egg cell are methylated around 50%. Upon fertilization the methylation drops and almost all genes become accessible for the undifferentiated blastula (clump of undifferentiated cells). As differentiation of the cells starts and as they evolve into tissues that get specific functions, methylation increases again. This because only a subset of the genes has to be accessible for a differentiated cell to carry out its function. The methylation also has the advantage that it is passed upon cell division leading to invariance of differentiated cells: indeed, a liver cell remains a liver cell upon division and a brain cell a brain cell, etc.   
+
+
+
+## Epigenetics and Learning
+
+This section is largely based on the review article of Creighton et al. entitled "Epigenetic Mechanisms of Learning and Memory: Implications for Ageing"  [@Creighton2020].
+
+In the last decade, it has been shown that epigenetics is very important in development of the brain and for learning. 
+
+Research has shown that the disruption and inhibition of gene transcription to RNA and translation to proteins has a tremendous impact on long time memories ($\geq 24$ hours), but not on short term memories. These manipulations had most impact in the first hours upon the learning event. Suggesting that the initial memory consolidation happens within a 6 hour time window. 
+
+Learning typically happens in waves. Genes activated shortly after learning return to baseline within 24 hours, a time point at which a second wave of gene expression is triggered. 
+In the second wave genes are included that encode for epigenetic regulators. 
+So, the first wave within 6 hours upon learning is known to upregulate transcription factors important to initiate the second wave of transcription, which is needed to establish long-lasting memories. 
+
+Understanding memory consolidation gets even more complex due to the reorganization of neural networks associated with recent memory storage and later memory phases ($>7$ days).
+
+### DNA Methylation and Memory
+
+In a large number of studies, DNA methylation has been shown to play an important role in multiple stages of memory formations. 
+
+On the one hand it is shown that DNA methylation is transient, i.e. rapidly induced and reversed in the first hours upon learning. On the other hand, stably altered cortical DNA methylation has been shown up to 4 weeks upon learning and blocking the cortical DNA methylations has been shown to impair memory.
+So methylation plays a role in different stages of the process of memory formation. 
+
+It also has been shown that methylation influences memory through different mechanisms, e.g. 
+
+- the regulation of the activity of enhancers, i.e. short DNA regions that enhance the transcription of proteins
+- alternative splicing. The transcribed RNA from a gene region is spliced, which can remove certain coding stretches, resulting in the production of different gene products from the same gene, and 
+- the expression of micro RNAs, short non coding RNAs, that are biologically active. 
+
+A large body of literature support the role of methylation in learning and it is shown that methylation associated to learning occurs in the hippocampus, prefrontal cortex and the amygdala of the brain. 
+
+### Histone Modifications and Memory
+
+Another type of epigenetic regulation is through the modification of histones, i.e. the proteins that act as spools around which the long DNA molecule is winded and which can affect the accessibility of a DNA region upon modification. 
+
+Histone post-translational modifications (PTMs) have been shown to be mainly important in the initial phase of memory consolidation. They are rapidly modified after which they return to baseline.
+
+Histone PTMs seem to regulate the transcriptional sensitivity towards external stimuli, and histone acetylation for instance has been shown to increase learning induced gene expression and seem to be particularly important for regulating memory strength. 
+
+### Histon Variants and Memory
+
+Histone variants, i.e. histones with different amino acid chains, have recently been shown to be important novel regulators of neural plasticity, i.e. the ability of the nervous system to change its activity in response to internal and external stimuli by reorganizing its structure, functions, or connections. Similar to histone modifications their dynamic nature is key for memory formation. 
+
+Recent progress has shown the tremendous importance of epigenetics for brain development and learning, however, the field of neuro-epigenetics is still in its infancy and many open questions remain.  
+
+## Epigenetics and Aging
+
+Epigenetics are also largely driven by ecofactors. This can be nicely illustrated with identical twins who have almost the same genome (small differences have been build up in the womb). It gets more easy to tell them apart over time due to epigenetic changes that are triggered by the different environments to which they were exposed. A good example is the difference between twins that have been exposed in a different way to UV radiation (e.g. Figure \@ref(fig:epiUV)). 
+
+(ref:epiUVlab) Difference in skin ageing between twins is largely induced by epigenetic changes originating from differences in exposure of UV radiation [@Schwab2017]
+
+```{r epiUV, fig.cap='(ref:epiUVlab)', out.width='50%', fig.asp=.8, fig.align='center', echo=FALSE}
+#knitr::include_graphics("https://www.researchgate.net/profile/Tara-Hogenson/publication/320386487/figure/fig1/AS:783847914471429@1563895314907/dentical-twins-with-phenotypic-discordance-due-to-environmental-exposure-Although-MZ.png")
+knitr::include_graphics("./figs/dentical-twins-with-phenotypic-discordance-due-to-environmental-exposure-Although-MZ.png")
+```
+
+Aging and longevity are influenced by genetic, epigenetic, and environmental factors during development, growth, maturity, and older stages.
+It has been shown that the genetic component (heritability) plays only a moderate role in aging and longevity, so epigenetics seems to be a major contributor [@Adwan2018]. Indeed, many epigenetics markers and in particularly DNA methylation sites have been shown to be remarkable predictors of chronological age. 
+Aging has been shown to be associated
+with profound changes in the epigenetic landscape, that give rise to alterations of gene expression and genome architecture. 
+
+An important modes of action in ageing has been shown to be through the association of epigenetics and telomere length. 
+
+Telomeres are a region of repetitive nucleotide sequences associated with specialized proteins at the ends of our chromosomes. Each cell division the telomeres get shorter and the telomere shortening has been associated with ageing of tissues and organs. 
+
+However, through an enzyme complex called telomerase, the telomeres can be extended. There is growing evidence that telomeres play a role in age-related processes. Indeed, mutations in telomerase and telomere genes causing increased telomere shortening, occur in patients with age-related disease, such as degenerative organ failure and a cancer-prone state among others. Moreover, 
+ genetically modified animal models have established causal links between telomere loss, cellular senescence (increasing cell death rates) and aging [@Adwan2018].
+
+Epigenetics has also been shown to play an important role in telomere maintenance [@Adwan2018]. 
+Multiple studies showed that telomeric and subtelomeric regions contain histone modifications and subtelomeric DNA can undergo methylation.
+Here, the epigenetic modification does not induce changes in the expression of target genes but affects telomere length or telomere structure.
+Moreover, genes involved in the production of telomerase also have been shown to be under the regulation of methylation.
+
+
+
+  
+## Epigenetics and Stress
+
+Epigenetic also have been shown to be a key mechanism by which stressors interact with the genome. 
+This leads to stable changes in DNA structure, gene expression, and behavior (e.g. @Park2019).
+
+Interestingly, stress and depression are mainly
+associated with epigenetic alterations in genes involved in mediating resilience, vulnerability to stress, and stress-response related genes (e.g. @Park2019). 
+
+In their book "the telomere effect" @BlackburnEpel2017 give an overview of their studies on the impact of stress on telomere length and telomerase activity. 
+They introduce many compelling examples and study results that underpin that ageing effects are strongly impacted by stress during childhood as well as by long-lasting stress on later age. And this, through the mediation of telomerase activity and telomere length, which we argued to be largely under control of epigenetics in the previous section. 
+
+@BlackburnEpel2017 also discuss studies where it was shown that mind-body techniques such as meditation, qigong and yoga, among others are stress reducing, have positive effects on our well-being, can prevent inflammation and can induce cell rejuvenation by (re-)activating the gene that is encoding for teleomerase. These effects were observed in well designed experiments and are in line with the beneficial effects that Rolando Toro also envisioned to induce through his System of Biodanza. 
+
+
+
+
