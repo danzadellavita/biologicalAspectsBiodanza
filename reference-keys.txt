@@ -46,6 +46,7 @@ fig:modelOnto
 fig:epigenetics
 fig:epiEmbryo
 fig:epiUV
+fig:telomeres
 fig:modelOnto2
 intro
 definition-of-biodanza
