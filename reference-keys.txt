@@ -75,7 +75,7 @@ building-blocks-of-life
 lipids
 carbohydrates
 amino-acids
-nucleic-acids
+sectionNucleicAcids
 life-is-chemistry
 energy
 catalysis
