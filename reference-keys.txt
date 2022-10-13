@@ -56,7 +56,7 @@ organic-renewal
 affective-re-education
 re-learning-of-the-original-functions-of-life
 sectionBiocentricPrinciple
-model-of-biodanza
+sectionModelOfBiodanza
 biological-aspects-of-biodanza
 methodology-of-biodanza
 music-movement-and-vivencia
@@ -71,7 +71,7 @@ life-is-one
 all-living-organisms-are-built-of-cells
 last-universal-common-ancestor
 sectionEnergyCoin
-same-building-blocks
+building-blocks-of-life
 lipids
 carbohydrates
 amino-acids
