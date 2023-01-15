@@ -47,7 +47,6 @@ fig:epiEmbryo
 fig:brainRegionsLearning
 fig:epiUV
 fig:telomeres
-fig:modelOnto2
 intro
 definition-of-biodanza
 vivencia
@@ -107,4 +106,5 @@ dna-methylation-and-memory
 histone-modifications-and-memory
 epigenetics-and-aging
 epigenetics-and-stress
-concluding-remarks-ontogenesis-in-biodanza
+ontogenesis-in-the-model-biodanza
+concluding-remarks
