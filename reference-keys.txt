@@ -106,11 +106,12 @@ genesis-of-life
 phylogenesis-and-evolution
 phylogenesis
 timescale
-change-point-eukaryotic-cells-and-increase-of-oxygen
+endosymbiosis
 evolution
 variability-and-selection
 genetic-drift
 horizontal-gene-transfer
+endosymbiosis-1
 teleonomy
 evolution-humanity-and-biodanza
 consciousness
