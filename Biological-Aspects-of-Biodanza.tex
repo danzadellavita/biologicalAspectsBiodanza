@@ -87,6 +87,9 @@
 \setlength{\evensidemargin}{0.25in}
 \setlength{\textwidth}{6.0in}
 \setlength{\textheight}{9.0in}
+
+\frontmatter
+\pagenumbering{gobble}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -96,8 +99,6 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Biological Aspects of Biodanza},
-  pdfauthor={Lieven Clement},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -105,9 +106,9 @@
   urlcolor={blue},
   pdfcreator={LaTeX via pandoc}}
 
-\title{Biological Aspects of Biodanza}
-\author{Lieven Clement}
-\date{2023-08-20}
+\title{\includegraphics{figs/titlePage.png}}
+\author{}
+\date{\vspace{-2.5em}}
 
 \begin{document}
 \maketitle
@@ -117,11 +118,13 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+\mainmatter
+
 \hypertarget{licence-and-links}{%
 \chapter*{Licence and links}\label{licence-and-links}}
 \addcontentsline{toc}{chapter}{Licence and links}
 
-This work is shared under the CC BY-NC-SA 4.0 licence.
+This work is shared under the CC BY-NC-SA 4.0 licence on 21 August, 2023.
 
 You may use the material for non-commercial purposes.
 
