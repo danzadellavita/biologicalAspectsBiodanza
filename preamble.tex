@@ -23,3 +23,16 @@
 \setlength{\evensidemargin}{0.25in}
 \setlength{\textwidth}{6.0in}
 \setlength{\textheight}{9.0in}
+
+\pagenumbering{gobble}
+
+\renewcommand{\maketitle}{
+\begin{center}\includegraphics[width=1\linewidth]{./figs/titlePage} \end{center}
+\newpage
+\frontmatter
+\pagenumbering{roman}
+}
+
+
+
+

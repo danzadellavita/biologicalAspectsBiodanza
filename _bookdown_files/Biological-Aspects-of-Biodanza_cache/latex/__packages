@@ -33,3 +33,12 @@ MASS
 TH.data
 multcomp
 NHANES
+Matrix
+lme4
+modeest
+gt
+datarium
+gridExtra
+carData
+car
+knitr
