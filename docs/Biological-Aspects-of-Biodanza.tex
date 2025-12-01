@@ -7,16 +7,19 @@
   11pt,
 ]{book}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -47,15 +50,17 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
@@ -100,14 +105,11 @@
 
 
 
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Biological Aspects of Biodanza},
   colorlinks=true,
@@ -129,11 +131,10 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\hypertarget{licence-and-links}{%
-\chapter*{Licence and links}\label{licence-and-links}}
+\chapter*{Licence and links}\label{licence-and-links}
 \addcontentsline{toc}{chapter}{Licence and links}
 
-This work is shared under the CC BY-NC-SA 4.0 licence on 29 February, 2024.
+This work is shared under the CC BY-NC-SA 4.0 licence on 01 December, 2025.
 
 You may use the material for non-commercial purposes.
 
@@ -149,8 +150,7 @@ Een nederlandstalige versie van het ebook vind je via deze link (A Dutch version
 
 \mainmatter
 
-\hypertarget{acknowledgements}{%
-\chapter*{Acknowledgements}\label{acknowledgements}}
+\chapter*{Acknowledgements}\label{acknowledgements}
 \addcontentsline{toc}{chapter}{Acknowledgements}
 
 My path to this monograph is a path of a lifetime.\\
@@ -270,8 +270,7 @@ and through you I could discover the beauty in my path as Biodanza teacher that 
 
 -- February 2024 --
 
-\hypertarget{summary}{%
-\chapter*{Summary}\label{summary}}
+\chapter*{Summary}\label{summary}
 \addcontentsline{toc}{chapter}{Summary}
 
 I started the Biodanza teacher training in the School of Antwerp in 2021. Its enriched environment changed my views on life and how I experience life, entirely. It triggered a tremendous personal growth and stimulated me to reconnect my mind, body and hart.
@@ -280,8 +279,7 @@ From the first module of the teacher training, I was startled to see that the ve
 
 My monograph, therefore, reflects my quest to understand Rolando's view on the biological aspects, which he enfolded in his model of Biodanza. In the first chapter, I introduce the model of Biodanza to put all readers on the same footprint. In the second chapter, I try to shed light on Rolando's view on life, his biocentric principle and vital unconsciousness. In this chapter I also lay the foundations for the remaining three chapters that each focus on an important biological aspect in the model of Biodanza: (1) Principles of cosmic life and the genesis of life, for which I give a short narrative on the history of the universe up to the origin of life, (2) Phylogenesis and evolution, in which I tells a brief story on the history of life and how life evolved, and, (3) Ontogenesis, where I shed some light on how we evolve from our origin as a fertilized egg cell up to our adult stage until we eventually die. In the latter chapter there is a strong focus on epigenetics, which is the missing link that Rolando Toro needed to explain how Biodanza can provide an enriched environment that induces change in how we use our genetic potential. Finally, I end this monograph with some concluding remarks and with an addendum with some additional texts and impressions that I have written during my Biodanza teacher training.
 
-\hypertarget{intro}{%
-\chapter{Introduction}\label{intro}}
+\chapter{Introduction}\label{intro}
 
 My Biodanza journey started in 2018. Fien, my wife, took up the Biodanza teacher training and together we joined a weekly Biodanza group in Brugge. We quickly experienced the positive impact of our Biodanza practice on our lifes.
 
@@ -328,8 +326,7 @@ Growth and learning in Biodanza happens as how children learn: by seeing, imitat
 
 In this remainder of this chapter we will lay the foundation that is needed before delving into the biological aspects of Biodanza. We begin with the definition of Biodanza. We continue with the Biocentric Principle. We then introduce the model of Biodanza and we conclude with the aims of this monograph.
 
-\hypertarget{definition-of-biodanza}{%
-\section{Definition of Biodanza}\label{definition-of-biodanza}}
+\section{Definition of Biodanza}\label{definition-of-biodanza}
 
 Rolando coined the term ``Biodanza'', which is a contraction of ``bios'', the Greek word for ``life'', and, ``danza'' the Spanish word for dance. Here, the word ``danza'' is used in its original sense of ``natural movement'' that is full of meaning and well-connected with our emotions.
 
@@ -341,8 +338,7 @@ The methodology of Biodanza consists of inducing integrating vivencia through mu
 
 In 2009 Rolando Toro combined this methodological aspect together with his observation that Biodanza accelerates integration in his updated definition: ``Biodanza is a system that accelerates integrative processes at the cellular, immune, metabolic, neuro-endocrino and existential level by providing an enriched environment including selected music, integrative movement, caress and group interactions.''
 
-\hypertarget{vivencia}{%
-\subsection{Vivencia}\label{vivencia}}
+\subsection{Vivencia}\label{vivencia}
 
 The concept of vivencia is key to understand the method of Biodanza.
 
@@ -350,8 +346,7 @@ Vivencia is an intense sensation of living, here and now, with a strong componen
 
 We do not have to try to rationalize our vivencia. They can been seen as manifestations of our bodily wisdom and spontaneously initiate integration and learning by experience. They are transformative experiences, which are the essence of the method of Biodanza. Indeed, our vivencia are key for growth and integration. Practicing Biodanza can also induce a sense of awakening when we notice that actual growth has taken place upon embodying our vivencia.
 
-\hypertarget{human-integration}{%
-\subsection{Human Integration}\label{human-integration}}
+\subsection{Human Integration}\label{human-integration}
 
 Through vivencia a strong connection with life is established, which induces the integration with oneself, the human species and the universe.
 
@@ -364,31 +359,26 @@ It lets us re-experience the deep connection of ourselves as part of the cosmos.
 
 By restoring this connection to life, we can re-experience life to its very existence, here and now, which promotes growth and renewal on a biological, physiological and psycho-emotional level and can also be accompanied by a sense of a deep conscious awakening.
 
-\hypertarget{organic-renewal}{%
-\subsection{Organic Renewal}\label{organic-renewal}}
+\subsection{Organic Renewal}\label{organic-renewal}
 
 Biological systems possess the unique capacity of self-replication and self-organisation. However, stress, among others, can have a profound impact on cell and tissue maintenance and regeneration.
 
 With transcendent Biodanza exercises we slow down our movements, lower our state of control and evoke a deep state of rest. This state is essential to switch on restoration and regeneration, and, reinforces homeostasis, i.e.~our bodies mechanism to maintain its equilibrium despite the changes in our environment.
 
-\hypertarget{affective-re-education}{%
-\subsection{Affective Re-education}\label{affective-re-education}}
+\subsection{Affective Re-education}\label{affective-re-education}
 
 In Biodanza many exercises stimulate and elicit affection and harmony, which can work through in our daily life by bringing harmony in our relation with ourselves, among each-other and with our environment.
 
-\hypertarget{re-learning-of-the-original-functions-of-life}{%
-\subsection{Re-learning of the Original Functions of Life}\label{re-learning-of-the-original-functions-of-life}}
+\subsection{Re-learning of the Original Functions of Life}\label{re-learning-of-the-original-functions-of-life}
 
 Biodanza practice also reconnects us with our primal instincts, which are suppressed in our modern society and are often viewed as irrational behavior.
 However, our instincts can be viewed as the biological wisdom of our species, which evolved for survival and maintenance of our species. By reconnecting ourselves with our innate impulses, we also restores harmony from within.
 
-\hypertarget{enriched-environment}{%
-\subsection{Enriched environment}\label{enriched-environment}}
+\subsection{Enriched environment}\label{enriched-environment}
 
 Biodanza provides an enriched environment with a deep respect for the uniqueness of each individual, without judgement or comparison. An environment that stimulates growth and free expression of each participant in the group. The enrichment also originates from selected music, integrative movement, caress and group interactions that act as positive ecofactors. Another pivotal element is the structure and repetition that is provided by weekly Biodanza classes. Indeed, the weekly vivencia are progressive and transformative, and accelerate human integration at the physical, physiological, psychological, emotional, social and existential level.
 
-\hypertarget{sectionBiocentricPrinciple}{%
-\section{Biocentric Principle}\label{sectionBiocentricPrinciple}}
+\section{Biocentric Principle}\label{sectionBiocentricPrinciple}
 
 The Biocentric Principle is at the heart of Rolando Torro's system of Biodanza. The biocentric principle considers the universe as the matrix of life, i.e.~a self-organizing structure that is building life. So not only living organisms, but, rather the entire cosmos is viewed as a massive living hologram.
 
@@ -398,8 +388,7 @@ To me, it seems an invitation to gravitate from anthropocentrism, with human bei
 
 Vivencia is the unique path to experience the Biocentric Principle and to genuinely become aware of it. This through our embodied mind, that also connects to that deeper knowledge that lies hidden in our inner self, ready to be touched by the intimate vivencial experience.
 
-\hypertarget{sectionModelOfBiodanza}{%
-\section{Model of Biodanza}\label{sectionModelOfBiodanza}}
+\section{Model of Biodanza}\label{sectionModelOfBiodanza}
 
 Rolando Toro developed a scheme of his model of Biodanza that summarizes its foundation in the life sciences and its methodology, which is displayed in Figure \ref{fig:model}.
 
@@ -414,8 +403,7 @@ Rolando Toro developed a scheme of his model of Biodanza that summarizes its fou
 
 In this section I will first briefly introduce the biological aspects in the model of Biodanza, which is the main theme of this monograph. Next, I will briefly touch upon the methodology of Biodanza.
 
-\hypertarget{biological-aspects-of-biodanza}{%
-\subsection{Biological Aspects of Biodanza}\label{biological-aspects-of-biodanza}}
+\subsection{Biological Aspects of Biodanza}\label{biological-aspects-of-biodanza}
 
 In Figure \ref{fig:model} we see that the biological aspects of Biodanza are forming the vertical axis, the skeleton, of the Model of Biodanza. Note, however, that these concepts also have an important sociological, psychological, emotional and mystic dimension as a very substantial part of our human life takes place in the symbolic social domain.
 
@@ -469,8 +457,7 @@ Also, external stimuli and eco-factors can induce epigenetic changes and thus ho
 Note, that in its broader definition ontogenesis not only looks at the biological development of the species, but also at the biological development of the individual which also implies an important social, psychological and emotional component.
 Indeed, it was exactly in this larger field that Rolando was operating. A field that lies at the interface of the life sciences, anthropology, psychology, physiology, art and mysticism, and from which he developed his system for growth and integration.
 
-\hypertarget{methodology-of-biodanza}{%
-\subsection{Methodology of Biodanza}\label{methodology-of-biodanza}}
+\subsection{Methodology of Biodanza}\label{methodology-of-biodanza}
 
 Vivencia is the cornerstone of the method of Biodanza. It reconnects us with the essence of life, which can work through both at the psycho-socio-emotional and the physiological level. Indeed, when we experience a deep vivencia, this is accompanied by intense bodily experiences. So, a Biodanza session might induce physiological changes, and can trigger the production of hormones, neurotransmitters and proteins, which originate from the expression of specific genes in our body and brain.
 
@@ -478,8 +465,7 @@ By integrating our vivencia and repeating exercises, Biodanza can promote human 
 
 The methodology of Biodanza is the central part in the model of Biodanza see Figure \ref{fig:model}, which I view as the body that is added to the skeleton of life.
 
-\hypertarget{music-movement-and-vivencia}{%
-\subsubsection{Music, Movement and Vivencia}\label{music-movement-and-vivencia}}
+\subsubsection{Music, Movement and Vivencia}\label{music-movement-and-vivencia}
 
 Vivencia is evoked by means of music, movement and encounters in an affective group.
 
@@ -492,16 +478,14 @@ With the delicate choice of the sequence of Biodanza exercises, the sequence of 
 
 Biodanza cannot be practiced in isolation. The encounter with each other is an essential component of movement and for generating a field that accommodates integration of oneself, with our human species and the whole.
 
-\hypertarget{horizontal-axis-identity-and-biological-regression}{%
-\subsubsection{Horizontal Axis: Identity and Biological Regression}\label{horizontal-axis-identity-and-biological-regression}}
+\subsubsection{Horizontal Axis: Identity and Biological Regression}\label{horizontal-axis-identity-and-biological-regression}
 
 Rolando has laid the foundation of his system during his career as a psychologist/researcher where he discovered the true impact of exercises that stimulate identity and biological regression, the horizontal axis in his system.
 
 A Biodanza session typically starts with vital rhythmic exercises that make participants aware of their body and their identity.
 Then we make the bridge to more deepening exercises where we slow down our movements to lower our state of control. This can evoke a deep state of rest, dissolution of our ego, transcendence and integration. Indeed a state of biological regression that is harmonious and progressive, which reactivates important physiological patterns and brings us in contact with our origin and our potential to rebalance ourselves, among others. In Biodanza regression always refers to this important state of biological regression.
 
-\hypertarget{vertical-axis-five-lines-of-biodanza}{%
-\subsubsection{Vertical Axis: Five Lines of Biodanza}\label{vertical-axis-five-lines-of-biodanza}}
+\subsubsection{Vertical Axis: Five Lines of Biodanza}\label{vertical-axis-five-lines-of-biodanza}
 
 Rolando structured our genetic potential in five lines: Vitality, Sexuality, Creativity, Affectivity and Transcendence. They are his translation of the biological concept of genetic potential towards a broader biological and socio-psycho-emotional realm in which human growth and development takes place.
 In a Biodanza session we typically work in two or more of these lines.
@@ -515,8 +499,7 @@ The protovivencia go hand in hand with flash learning, the very rapid learning t
 During a Biodanza session we let (a subset of) the five lines pulsate by a sequence of exercises that first strengthen our identity and then induce biological regression.
 Exercises that strengthen identity let practitioners become more aware of themselves, the world around them and how they stand in that world. Exercises that stimulate biological regression on the other hand stimulates the ego to dissolve and promote a connection with our different levels of unconsciousness.
 
-\hypertarget{unconsciousness}{%
-\subsubsection{Unconsciousness}\label{unconsciousness}}
+\subsubsection{Unconsciousness}\label{unconsciousness}
 
 In the periphery of methodology of Biodanza in the Model (Figure \ref{fig:model}), we find the personal unconsciousness, collective unconsciousness and vital unconsciousness.
 Which is a resonance with ideas and information on ourselves, our primal instincts and archetypes, and the information that pulsates in the matrix of life, respectively.
@@ -531,8 +514,7 @@ At the end of his life, Rolando Toro, introduced a fourth unconsciousness, a dee
 The numinous unconsciousness consists of four key characteristics: love, enlightenment, courage and intasy. Indeed, the need to love is intrinsic to our organism. Love implies communion, empathy, tenderness and mercy. It can be undifferentiated, love for humanity, and differentiated, love for a particular person or group. It can even reach a cosmic level, i.e.~epiphanic love, in which our heart, enters into communion with the heart of the other. The second characteristic is enlightenment, not as that from a guru, but as a process towards the other. It is the ability to see the best in each of us, to discover their essence and reveal their desire to live and be happy. The third characteristic is courage, the courage to know what we want without fear, to challenge our fear of living and loving. The courage to emerge from chaos when we are suffering or feel abandoned. The fourth characteristic is intasy, which refers to the splendor of our species, the splendor of being part of the universe, of the cosmos \citep{toro2009}.
 \newpage 
 
-\hypertarget{aims-of-this-monograph}{%
-\section{Aims of this monograph}\label{aims-of-this-monograph}}
+\section{Aims of this monograph}\label{aims-of-this-monograph}
 
 This monograph focuses on the Biological aspects of Biodanza. It is my impression on ``Module II: Vital Unconsciousness and Biocentric Principle'' and ``Module IV: Biological Principles of Biodanza'' of the Biodanza teacher training that I followed in the School of Antwerp.
 
@@ -554,8 +536,7 @@ This attempt consists of four parts:
 
 While the remainder of this monograph focuses on the Biological Aspects of Biodanza, it is important, however, to keep in mind that it is not my intention to reduce the Model of Biodanza to its biological aspects, only. Indeed, many of the concepts that we will touch upon from a biological perspective also have an important sociological, psychological, emotional and mystic dimension as a very substantial part of our human life takes place in the symbolic social domain.
 
-\hypertarget{what-is-life}{%
-\chapter{What is Life?}\label{what-is-life}}
+\chapter{What is Life?}\label{what-is-life}
 
 One of the key drivers for Rolando Toro to develop his System of Biodanza was the disconnection he observed of men and women from the cosmic matrix, throughout our Western history, which has generated destructive cultural forms. This resulted from our Cartesian way of thinking, which caused a fragmented view of life. Indeed, it implied a division between body and mind, humanity and nature, living matter and non-living matter, and it considers the universe as being analyzable in separately existing parts that more or less interact as parts of a machine \citep{bohm1980}. This fragmented world view disconnected us from the universe that we inhabit and broke up our human society into distinct religious, political, economical and racial groups, among others leading to the exploitation of our natural resources, plants, animals and of fellow humans.
 
@@ -567,13 +548,11 @@ With his axiom, however, Rolando went one step further. Indeed, in his book on B
 
 When thinking about science, however, it is crucial, as \citet{bohm1980} nicely formulates, to acknowledge that scientific theories are not ``true knowledge'' corresponding to ``the reality as is'', but rather ever-changing insights that are giving shape and form to how we view and experience the world. This reflects my quest in this monograph: to shed light on Rolando's insights on biological aspects, which he enfolded in his model of Biodanza.
 
-\hypertarget{rolando-toros-view-of-life-and-his-biocentric-principle}{%
-\section{Rolando Toro's View of Life and his Biocentric Principle}\label{rolando-toros-view-of-life-and-his-biocentric-principle}}
+\section{Rolando Toro's View of Life and his Biocentric Principle}\label{rolando-toros-view-of-life-and-his-biocentric-principle}
 
 In his book of Biodanza Rolando argues that the universe can be understood as a living system and that ``the realm of life embraces much more than the plants, the animals and man. Everything that exists, from neutrinos to quasars, from the fine stone to the most subtle thought, is a part of this prodigious living system'', which he often refers to as a gigantic living hologram.
 
-\hypertarget{holographic-analogy-for-the-universe}{%
-\subsection{Holographic Analogy for the Universe}\label{holographic-analogy-for-the-universe}}
+\subsection{Holographic Analogy for the Universe}\label{holographic-analogy-for-the-universe}
 
 Where did Rolando's holographic analogy for the universe come from?
 The word hologram comes from Greek where the word holos means entire or whole and the suffix gram means something written down or recorded.
@@ -609,8 +588,7 @@ The example also shows how relative time is and how each life can be seen as a c
 
 Note, that the seed example also demonstrates how powerful the concept is of an enriched environment: when we enrich the environment with the information in the plant seed, the environment is somehow directed to grow this magnificent sunflower. This analogy can be taken to our human realm and was exactly what Rolando intended with Biodanza: providing an enriched environment that can influence our ontogenesis, i.e.~how Biodanza creates the information or the ecofactors that enrich our environment to trigger our evolution as a human being and this both on a physiological and psycho-socio-emotional level. As in the sunflower seed example, we can then germinate in our own social environment and transform it with our growth.
 
-\hypertarget{the-universe-as-a-self-organising-structure}{%
-\subsection{The Universe as a Self-organising Structure}\label{the-universe-as-a-self-organising-structure}}
+\subsection{The Universe as a Self-organising Structure}\label{the-universe-as-a-self-organising-structure}
 
 Rolando also referred to the universe as the matrix of life, i.e.~a self-organising structure that is building life and that has to be understood as a gigantic living system by itself.
 
@@ -637,8 +615,7 @@ Prigogine showed that spontaneous self-organisation also occurs in chemical syst
 
 So instead of clinging to the destructive division of humanity and nature, or to the equally destructive idea that we humans are an incidental and irrelevant feature of the cosmos, we rather can embrace ourselves as children of our universe. A result of its remarkable creativity with a beauty similar to all magnificent self-organising structures that are surrounding us.
 
-\hypertarget{organisation-of-this-chapter}{%
-\subsection{Organisation of This Chapter}\label{organisation-of-this-chapter}}
+\subsection{Organisation of This Chapter}\label{organisation-of-this-chapter}
 
 The remaining of this chapter builds on the work of five scientists who were very influential and whose insights can help us to increase our understanding on the biological aspects that Rolando Toro included in his Model for Biodanza:
 
@@ -658,8 +635,7 @@ Note, that the subsections in ``Christian de Duve: a biochemical view of life'' 
 
 \newpage
 
-\hypertarget{schruxf6dinger-and-prigogine-a-thermodynamic-view-of-life}{%
-\section{Schrödinger and Prigogine: a Thermodynamic View of Life}\label{schruxf6dinger-and-prigogine-a-thermodynamic-view-of-life}}
+\section{Schrödinger and Prigogine: a Thermodynamic View of Life}\label{schruxf6dinger-and-prigogine-a-thermodynamic-view-of-life}
 
 In his seminal lecture series: ``What Is Life? The Physical Aspect of the Living Cell'' \citet{schrodinger1944} defined life as
 
@@ -685,8 +661,7 @@ We intuitively know the latter: our body is typically at a higher energy state t
 
 \pagebreak
 
-\hypertarget{dissipative-structures}{%
-\subsection{Dissipative Structures}\label{dissipative-structures}}
+\subsection{Dissipative Structures}\label{dissipative-structures}
 
 Prigogine discovered that complex self-organising systems can spontaneously arise if they are open and can exchange lots of energy and matter with their surroundings.
 Key for this \emph{anabasis} is a chaos of matter and a flow of energy through the system.
@@ -695,8 +670,7 @@ In chemical systems, and life is to a large extent chemistry, the influx of ener
 The structure that spontaneously emerges in living organisms is thus not violating the second law because of the rise in entropy by the dissipation of heat, which again shows how the processes of anabasis and catabasis go hand in hand.
 Prigogine therefore coined the novel term dissipative structures for such systems.
 
-\hypertarget{attractors}{%
-\subsection{Attractors}\label{attractors}}
+\subsection{Attractors}\label{attractors}
 
 In the reader of the Biodanza teacher training ``Module II Vital Unconsciousness and Biocentric Principle'' Rolando Toro often uses the term attractor. Dissipative structures typically have multiple attractors, i.e.~states, regimes, forms, shapes or structures to which they spontaneously evolve. The specific attractor to which the system is organising itself highly depends on the initial environmental conditions.
 Note, that dissipative structures are also characterized by feedback loops.
@@ -731,8 +705,7 @@ The Dictyostelium example also clearly shows how hard-wired and precise instinct
 
 These instincts are shared between all life forms, however, their expression is differentiated at a different level in distinct species. So instincts are the attractors of life. Therefore, the liberation of our instincts was so important for Rolando Toro. With Biodanza we will reconnect to and strengthen our instincts along the five lines of Biodanza, which are each connected to these overarching instincts, e.g.~the instinct of conservation is connected to line of vitality, sexuality to the line of sexuality, exploration to the line of creativity, solidarity to line of affectivity, and tropism to the line of transcendence\footnote{Note, that we only included the instincts that we observed in the Dictyostelium example. Hence, more overarching instincts are linked to these five lines, which can be found in the Rolando's book on Biodanza.}.
 
-\hypertarget{dissipative-zones}{%
-\subsection{Dissipative Zones}\label{dissipative-zones}}
+\subsection{Dissipative Zones}\label{dissipative-zones}
 
 In the reader of the Biodanza teacher training ``Module II Vital Unconsciousness and Biocentric Principle'' it is also mentioned that we live in a dissipative zone. Indeed, our whole globe can be seen as a large dissipative structure located in our solar system, which is a dissipative zone.
 
@@ -757,8 +730,7 @@ This cyclic nature with its eternal reappearance is key for renewal and vitality
 
 \newpage
 
-\hypertarget{de-duve-a-biochemical-view-of-life}{%
-\section{de Duve: a Biochemical View of Life}\label{de-duve-a-biochemical-view-of-life}}
+\section{de Duve: a Biochemical View of Life}\label{de-duve-a-biochemical-view-of-life}
 
 In his Book ``Life Evolving - Molecules, Mind and Meaning'', \citet{deDuve2002} gave a very simple but brilliant definition of life:
 
@@ -777,8 +749,7 @@ Life is
 
 In the following sections we will explore what de Duve meant with each component in his definition. Note, that each section starts with the key idea and then consists of more technical subsections that introduce the biological concepts in the reader ``Module IV Biological aspects of Biodanza'' in more detail.
 
-\hypertarget{lifeOne}{%
-\subsection{Life is One}\label{lifeOne}}
+\subsection{Life is One}\label{lifeOne}
 
 The first part in the definition of de Duve, ``Life is One'', has been instrumental for Rolando Toro when he coined the term ``Vital Unconsciousness''.
 
@@ -796,8 +767,7 @@ Life is one because all living organisms on earth
   use the same biological building blocks: lipids, sugars, amino acids for proteins and nucleic acids (DNA and RNA).
 \end{itemize}
 
-\hypertarget{all-living-organisms-are-built-of-cells}{%
-\subsubsection{All Living Organisms are Built of Cells}\label{all-living-organisms-are-built-of-cells}}
+\subsubsection{All Living Organisms are Built of Cells}\label{all-living-organisms-are-built-of-cells}
 
 ``Life is One'' because all organisms are composed of cells.
 Green algae that can perform photosynthesis are a beautiful example of unicellular organisms. They were key for the development of life on our planet by releasing oxygen in our atmosphere (Figure \ref{fig:greenAlgae}).
@@ -827,8 +797,7 @@ tissues, e.g.~spongy tissue in our bones or epithelium cells of our stomach; org
 
 \pagebreak
 
-\hypertarget{last-universal-common-ancestor}{%
-\subsubsection{Last Universal Common Ancestor}\label{last-universal-common-ancestor}}
+\subsubsection{Last Universal Common Ancestor}\label{last-universal-common-ancestor}
 
 ``Life is One'' because all species evolved from the same ancestral population of cells.
 This is also referred to as the Last Universal Common Ancestor (LUCA). It is nicely indicated by the tree of life in Figure \ref{fig:treeOfLife}, which is one of the most important organising principles in biology. It shows the evolutionary relationships among different organisms and that all living beings eventually can be traced back to LUCA who is located at the root of the tree. Note, that the animal kingdom to which we belong is only a small branch in the tree.
@@ -842,8 +811,7 @@ This is also referred to as the Last Universal Common Ancestor (LUCA). It is nic
 \caption{The tree of life is one of the most important organising principles in biology. It shows the evolutionary relationships among different organisms and also that all living beings eventually can be traced back to the last universal common ancestor (LUCA), who is located at the root of the tree (Source: Wikipedia)}\label{fig:treeOfLife}
 \end{figure}
 
-\hypertarget{sectionEnergyCoin}{%
-\subsubsection{Energy Coin}\label{sectionEnergyCoin}}
+\subsubsection{Energy Coin}\label{sectionEnergyCoin}
 
 ``Life is One'' because all living organisms use the same ``energy coin'', the ATP-ADP system, to store and reuse energy\footnote{Explained in technical terms, Adinosine-triphosphate (ATP) consists of a ribose sugar with 3 phosphate groups and a base adinine.
   Splitting a phosphate group from adinosine-triphosphate (ATP) results in adinosine-diphosphate (ADP), a free phosphate group and energy.
@@ -863,8 +831,7 @@ Note, that ATP is also used to build RNA, an important molecule involved in stor
 
 \pagebreak
 
-\hypertarget{building-blocks-of-life}{%
-\subsubsection{Building Blocks of Life}\label{building-blocks-of-life}}
+\subsubsection{Building Blocks of Life}\label{building-blocks-of-life}
 
 ``Life is One'' because all living organisms are composed of the same basic bio-molecules and we all know more than we think about them because we are what we eat!
 
@@ -885,8 +852,7 @@ Almost all molecules of living organisms are composed of
 
 Below, we focus on each of these building blocks in more detail. Readers who would like to skip technical details can immediately go to section \ref{lifeChemistry} Life is Chemistry.
 
-\hypertarget{lipids}{%
-\paragraph{Lipids}\label{lipids}}
+\paragraph{Lipids}\label{lipids}
 
 \begin{figure}
 
@@ -903,8 +869,7 @@ Lipids, fats and oils, are used for storage of energy, regulation of hormones, t
 
 Membranes provide the basis for concentrating specific molecules in (compartments of) living cells. This enable cells to build up a disequilibrium of chemical molecules that can perform work as a concentration gradient spontaneously dissipates toward its equilibrium value. So phospholipids are key for creating the boundary conditions necessary for cellular organization.
 
-\hypertarget{carbohydrates}{%
-\paragraph{Carbohydrates}\label{carbohydrates}}
+\paragraph{Carbohydrates}\label{carbohydrates}
 
 Carbohydrates are important bio-molecules that are used for storage, energy and structure (Figure \ref{fig:carbohydrates}).
 
@@ -929,8 +894,7 @@ Carbohydrates are important bio-molecules that are used for storage, energy and 
 
 \pagebreak
 
-\hypertarget{sectionAminoAcids}{%
-\paragraph{Amino Acids}\label{sectionAminoAcids}}
+\paragraph{Amino Acids}\label{sectionAminoAcids}
 
 Amino acids by themselves are simple molecules (Figure \ref{fig:aminoAcids}).
 Although hundreds of amino acids exist in nature, life is using only 20 of them and it is combining them in long molecules, polymers, which are referred to as proteins.
@@ -963,8 +927,7 @@ Indeed, many proteins work as a ``lock'' in which specific (bio)molecules fit as
 
 Proteins are the main workhorses of the cell and they are important for moving food, digesting food, copying DNA, for giving the cell structure, affecting the rates at which other proteins work, etc\ldots{}
 
-\hypertarget{sectionNucleicAcids}{%
-\paragraph{Nucleic Acids}\label{sectionNucleicAcids}}
+\paragraph{Nucleic Acids}\label{sectionNucleicAcids}
 
 Nucleic acids are build of nucleotides.
 Each nucleotide is composed of one of four nitrogen-containing nucleobases, which carry the information
@@ -1024,8 +987,7 @@ Life is also one because we share the same genetic code, but we refer to Section
 
 \newpage
 
-\hypertarget{lifeChemistry}{%
-\subsection{Life is Chemistry}\label{lifeChemistry}}
+\subsection{Life is Chemistry}\label{lifeChemistry}
 
 ``Life is Chemistry'' because a cell consists of a complex network of chemical reactions that are connected to each other. Many feedback loops exist in this chemistry making it largely nonlinear. The feedback loops enables a cell to maintain in its regime or to switch from regime or attractor upon external and/or internal stimuli. An overview of most reactions in a living cell is given in Figure \ref{fig:chemicalReactionsCell}. I only included this overview to provide the reader with a sense of the complexity and the wealth of chemistry that takes place in each single cell. You can zoom in on this map on \url{http://biochemical-pathways.com/\#/map/1}.
 
@@ -1040,13 +1002,11 @@ Life is also one because we share the same genetic code, but we refer to Section
 
 In the remainder of this section we will introduce energy and catalysis in more detail, and we also give an intriguing example of how proteins play a role in the self-organisation of a cell. Readers who would like to skip technical details can immediately go to section \ref{lifeInformation} Life is Information.
 
-\hypertarget{energy}{%
-\subsubsection{Energy}\label{energy}}
+\subsubsection{Energy}\label{energy}
 
 ``Life is Chemistry'' because it uses chemical reactions to store and use energy. See the ATP-ADP system in Section \ref{sectionEnergyCoin}
 
-\hypertarget{catalysis}{%
-\subsubsection{Catalysis}\label{catalysis}}
+\subsubsection{Catalysis}\label{catalysis}
 
 ``Life is Chemistry'' because most chemical reactions are catalyzed, i.e.~initiated, promoted and made faster by proteins. The proteins facilitate the reaction without being used. The reactions would never take place if we would only mix the molecules at the concentrations that are typically occurring in a cell.
 
@@ -1099,8 +1059,7 @@ We can end this section with a quote of \citet{deDuve2002}: ``Any living organis
 
 \pagebreak
 
-\hypertarget{self-organisation}{%
-\subsubsection{Self-Organisation}\label{self-organisation}}
+\subsubsection{Self-Organisation}\label{self-organisation}
 
 Life is also characterized by its ability for self-organisation. Some proteins are also important to give structure to a cell and they can spontaneously form structure.
 An intriguing illustration of self-organisation is provided by \citet{Cheng2019} who
@@ -1132,8 +1091,7 @@ Note, that proteins thus play a central role in life. They are key for catalysis
 
 \newpage
 
-\hypertarget{lifeInformation}{%
-\subsection{Life is Information}\label{lifeInformation}}
+\subsection{Life is Information}\label{lifeInformation}
 
 Our genetic information to build all our bio-molecules, which we inherit from our parents, is stored in our DNA. DNA is a hetero-polymer or a long chain of 4 different building blocks, nucleotides. So the genetic information is stored in an alphabet of 4 letters. This is
 adenine (A), cytosine (C), guanine (G) and thymine (T) for DNA.
@@ -1142,8 +1100,7 @@ It makes no physical or chemical difference what the identity of the next nucleo
 
 In the reminder of this section we will focus on the flow of information in a cell in more detail. Readers who would like to skip technical details can immediately go to section \ref{maturanaVarela} Maturana and Varela: a Systems View of Life.
 
-\hypertarget{the-central-paradigm-of-molecular-biology}{%
-\subsubsection{The Central Paradigm'' of Molecular Biology}\label{the-central-paradigm-of-molecular-biology}}
+\subsubsection{The Central Paradigm'' of Molecular Biology}\label{the-central-paradigm-of-molecular-biology}
 
 The ``central paradigm'' of molecular biology states that the sequence of nucleotides in DNA are first \emph{transcribed} into RNA and then \emph{translated} into proteins, see Figure \ref{fig:centralParadigm}.
 
@@ -1241,8 +1198,7 @@ DNA is thus the carrier of genetic information. However, RNA plays a more centra
 
 \newpage
 
-\hypertarget{maturanaVarela}{%
-\section{Maturana and Varela: a Systems View of Life}\label{maturanaVarela}}
+\section{Maturana and Varela: a Systems View of Life}\label{maturanaVarela}
 
 In the reader of the Biodanza teacher training ``Module IV: Biological Aspects of Biodanza'' Rolando Toro also introduced the term \emph{autopoiesis}.
 
@@ -1267,8 +1223,7 @@ Networks of cells are then combined in larger autopoietic units, e.g.~
 An organism or a biological system can therefore not be broken down or reduced to its parts to provide a complete understanding of it. A complete understanding is only possible when it is viewed as a whole.
 Indeed, new functions emerge at a higher level from the network that has been formed between its lower-level parts. Varela refers to these properties with the term \emph{emergent properties}.
 
-\hypertarget{emergent-properties}{%
-\subsection{Emergent Properties}\label{emergent-properties}}
+\subsection{Emergent Properties}\label{emergent-properties}
 
 Emergent properties can be found at each level. At the chemical level, where the protein hemoglobin for instance has the unique property that it can transport oxygen. This property emerges from its unique 3D structure (see Figure \ref{fig:hemoglobin}). We could never have derived its biological function at the protein-level by breaking it down to its constituting amino acids and only studying the individual properties of each of these amino acids (see section \ref{sectionAminoAcids} for more details on amino acids).
 
@@ -1299,16 +1254,14 @@ Indeed, when glaciers pull back lichens appear on the bare hostile rocks and in 
 
 Although lichens macroscopically look like one being, they are effectively two beings: a green algae with the precious gift of photosynthesis that turns sunlight and air into sugars, and, a fungus that provides shelter and is gifted with the art to mine the rocks for minerals, but which cannot make sugars. They are joined in a symbiosis that is so close that their union becomes an entirely new organism. When biologists tried to unravel this unique algal-fungal marriage, they started to grow them in the lab in ideal conditions for both algae and fungus. However, under these conditions they both happily lived next to each other. So the unique properties of lichens could not be delineated from studying both species apart. Only when the scientists exposed them to ecofactors that became so harsh, they teamed up in reciprocity and gained their unique transformative power of turning rocks into fertile environments \citep{Kimmerer2013}.
 
-\hypertarget{life-as-an-emergent-property}{%
-\subsection{Life as an Emergent Property}\label{life-as-an-emergent-property}}
+\subsection{Life as an Emergent Property}\label{life-as-an-emergent-property}
 
 \citet{capraLuisi2014} convincingly argue that the same holds at any level and for life itself. Indeed the autopoietic property of a cell originates by properly combining all its molecules in the large networks of chemical reactions from which its structure and organisation, self maintenance, and self replication emerge. We cannot localize life. Life is simply a global property that emerges from the collective interactions of all kind of molecules in a cell, of the collection of cells in a tissue, of the collection of tissues in a organ system, of the collection of organ systems for an organism, of the collection of organisms in a population etc.
 At each level we have a network of lower level components from which new properties naturally emerge.
 
 So life itself is an emergent property, it is not present in the parts it originates from, and only emerges when its parts are assembled together correctly.
 
-\hypertarget{life-as-a-gestalt-of-autopoetic-unit-cognition-and-environment}{%
-\subsection{Life as a Gestalt of Autopoetic unit, Cognition and Environment}\label{life-as-a-gestalt-of-autopoetic-unit-cognition-and-environment}}
+\subsection{Life as a Gestalt of Autopoetic unit, Cognition and Environment}\label{life-as-a-gestalt-of-autopoetic-unit-cognition-and-environment}
 
 For Maturana and Varela cognition is also inseparable from autopoiesis \citep{capraLuisi2014}. Each living organism is an open system that interacts with its environment through its sensory arsenal. It senses its environment, it feeds on its environment, releases products in it, it changes its environment, and, actualizes itself to its environment. The fact that an organism is changing its environment is often overlooked. However, life has dramatically transformed Earth. Indeed, think of photosynthesis for instance that radically changed Earth by the release of the highly reactive molecule oxygen.
 
@@ -1333,8 +1286,7 @@ Interestingly, Rolando sees life as the organizing principle of the universe. So
 
 \pagebreak
 
-\hypertarget{our-social-system-as-an-emergent-property}{%
-\subsection{Our Social System as an Emergent Property}\label{our-social-system-as-an-emergent-property}}
+\subsection{Our Social System as an Emergent Property}\label{our-social-system-as-an-emergent-property}
 
 The insights of Maturana and Varela have the compelling implication that we no longer need the duality of matter and mind when trying to understand life. Life naturally arises as an emerging property of the large networks of matter or molecules at the level of each individual cell, the basic autopoietic unit, and then new properties emerge at a higher level when combining autopoietic units into tissues, organs, organ systems, organisms, populations, etc.
 
@@ -1342,8 +1294,7 @@ As such, we can also view our cognitive awareness as an emerging property of the
 
 Indeed, at the next level, the network of people, our rich psycho-socio-emotional realm emerges. As human beings, our lives do not only take place in the physical domain, but also in the symbolic social domain, which is also very important for our development. Hence, our behavior in the physical domain is shaped by the ``laws of nature'', while our behavior in the social domain is governed by rules that are generated by the social system itself \citep{capraLuisi2014}. Moreover, research in the social sciences has pointed out that social networks exhibit the same general principles as biological networks. So, as human beings we develop ourselves in an organised ensemble with internal rules that are generated by the networks and their boundaries, i.e.~the physical boundary in our biological networks and the cultural boundary in our social networks \citep{capraLuisi2014}.
 
-\hypertarget{shared-bio-logic-from-cell-to-social-system}{%
-\subsection{Shared ``Bio-logic'' from Cell to Social System}\label{shared-bio-logic-from-cell-to-social-system}}
+\subsection{Shared ``Bio-logic'' from Cell to Social System}\label{shared-bio-logic-from-cell-to-social-system}
 
 Similar to the biochemical system of a cell, the social system is an open system with social feedback loops. Indeed, each social system needs to sustain itself in a stable but dynamic way, by letting new members, materials and ideas to enter the system, which will in turn be transformed by the internal rules or organisation of the system \citep{capraLuisi2014}, leading to a kind of ``social homeostasis''. Sometimes, these novel ideas can be so powerful that they transform the social system by itself, i.e.~switching it towards a novel attractor. At the individual level, however, the transformation implied by the social system sometimes are a bliss, but they also can cause trauma. The observation that the ``bio-logic'' or pattern of organisation of a simple cell is similar to that of an entire social structure has large implications.
 
@@ -1354,8 +1305,7 @@ So this shared bio-logic from cells up to our symbolic realm, suggests a fundame
 
 This bio-psycho-socio-emotional angle, although extremely interesting, is beyond the scope of this monograph as it can give food of thought for an entire monograph on itself.
 
-\hypertarget{links-to-vital-unconciousness}{%
-\section{Links to Vital Unconciousness}\label{links-to-vital-unconciousness}}
+\section{Links to Vital Unconciousness}\label{links-to-vital-unconciousness}
 
 ``Life is One'', all species originated from the same population of ancestral cells, they use the same chemistry, and the same encoding system to store their genetic information.
 The wealth of living species, all with their own sensory arsenal, have all been shaped from our last universal common ancestor through evolution by interactions with their environment.
@@ -1370,8 +1320,7 @@ So it becomes clear that all beings are sharing common overarching instincts and
 
 So this shared \emph{psychism} or \emph{vital unconsciousness} encompasses the origin of our instincts, bodily sensations and deeper knowledge that we can experience immediately from our embodied mind. Vivencia is a path to deeply connect, ameliorate and rebalance the vital unconsciousness, and, this along the five lines of Biodanza.
 
-\hypertarget{rolando-toros-view-on-life}{%
-\section{Rolando Toro's View on Life}\label{rolando-toros-view-on-life}}
+\section{Rolando Toro's View on Life}\label{rolando-toros-view-on-life}
 
 Now that we developed a deeper understanding of life from different perspectives, we can better understand Rolando Toro's view on life.
 
@@ -1384,8 +1333,7 @@ Unlike Varella and Maturana, who consider life as an emergent property of the ge
 
 Now that we developed a better understanding of Rolando Toro's view on life, we will elaborate in the remaining chapters of this monograph on where, how and why biological aspects appear in the Model of Biodanza. Do note, however, that many of the concepts that we will touch upon from a biological perspective also have an important sociological, psychological, emotional and mystic dimension as a very substantial part of our human life takes place in the symbolic social domain.
 
-\hypertarget{principles-of-cosmic-life-and-the-genesis-of-life}{%
-\chapter{Principles of Cosmic Life and the Genesis of Life}\label{principles-of-cosmic-life-and-the-genesis-of-life}}
+\chapter{Principles of Cosmic Life and the Genesis of Life}\label{principles-of-cosmic-life-and-the-genesis-of-life}
 
 The biological aspects are the vertical axis of the Model of Biodanza.
 At the bottom of the model, we first encounter the Principles of Cosmic Life and the Genesis of Life, which are indicate with the red box in Figure \ref{fig:modelCosmic}.
@@ -1401,8 +1349,7 @@ At the bottom of the model, we first encounter the Principles of Cosmic Life and
 
 We will start with the genesis of the universe and we conclude with the genesis of life\footnote{Here life has the meaning of biological life and not the more broad view that Rolando has on life}. These two sections cover the concepts in the reader for Module IV Biological aspects of Biodanza on these topics.
 
-\hypertarget{genesis-of-universe}{%
-\section{Genesis of Universe}\label{genesis-of-universe}}
+\section{Genesis of Universe}\label{genesis-of-universe}
 
 An overview of the evolution of our universe is given in Figure \ref{fig:evolutionUniverse}.
 
@@ -1420,8 +1367,7 @@ A very energy-rich state.
 
 By expanding the universe quickly cooled down enough for energy to be converted into mass, i.e.~the majority in hydrogen and a fraction in more heavy helium nuclei.
 
-\hypertarget{genesis-of-stars}{%
-\subsection{Genesis of Stars}\label{genesis-of-stars}}
+\subsection{Genesis of Stars}\label{genesis-of-stars}
 
 Under the influence of the gravitational force, matter then started to cluster in nebula, gaseous clouds essentially consisting of hydrogen (H) and helium (He).
 
@@ -1478,8 +1424,7 @@ Hence, through nuclear fusion in the stars the more heavy atoms have been genera
 
 \newpage
 
-\hypertarget{carbohydrates-in-interstellar-space}{%
-\subsection{Carbohydrates in Interstellar Space}\label{carbohydrates-in-interstellar-space}}
+\subsection{Carbohydrates in Interstellar Space}\label{carbohydrates-in-interstellar-space}
 
 Upon nuclear fusion in the stars many different elements are formed. For biological life, hydrogen, carbon, oxygen, sulfur, phosphorous and nitrogen atoms, among others, are key to compose organic matter.
 
@@ -1498,8 +1443,7 @@ PAHs were already be generated shortly after the Big Bang. Once they are produce
 
 This, among other arguments, let Christian de Duve to formulate his quote that ``Life is an obligatory manifestation of matter, written into the fabric of the universe'' \citep{deDuve2002}.
 
-\hypertarget{genesis-of-life}{%
-\section{Genesis of Life}\label{genesis-of-life}}
+\section{Genesis of Life}\label{genesis-of-life}
 
 In a remote corner of our milky way, which is an average galaxy, an average planet was formed, which we know as our planet Earth.
 After the Earth cooled down liquid water was formed. The unique features of liquid water are essential for life as we know it.
@@ -1528,8 +1472,7 @@ LUCA was anaerobic, living without oxygen, and maintained its hereditary materia
 
 Now, that we introduced the genesis of life, we can focus on the tale of the evolution of LUCA into all species of the tree of life, a process which is also referred to as phylogenesis.
 
-\hypertarget{phylogenesis-and-evolution}{%
-\chapter{Phylogenesis and Evolution}\label{phylogenesis-and-evolution}}
+\chapter{Phylogenesis and Evolution}\label{phylogenesis-and-evolution}
 
 In the middle of the model, we see the biological aspect ``phylogenesis'' indicated with the red box in Figure \ref{fig:modelPhylo}, which is our focus in this chapter.
 
@@ -1572,8 +1515,7 @@ Hence, it is extremely valuable to study what life has in common, so as to bette
 
 We start this chapter with two sections that are more technical and focus on the concepts related to Phylogenesis and Evolution introduced in the reader of the Biodanza teacher training ``Module IV: Biological aspects of Biodanza''. We conclude this chapter with a more philosophical section on evolution, humanity and Biodanza.
 
-\hypertarget{phylogenesis}{%
-\section{Phylogenesis}\label{phylogenesis}}
+\section{Phylogenesis}\label{phylogenesis}
 
 All species evolved from the same ancestral population of cells.
 This is also referred to as the same Last Universal Common Ancestor (LUCA).
@@ -1592,18 +1534,18 @@ Phylogenesis is the process of the origin of all species from the tree of life f
 
 Rolando Toro refers to the origin of species and adaptation to the environment as evolutionary differentiation and he considers the genetic information of a species as a record of the environments and evolutionary development that it underwent up to this point.
 
-\hypertarget{timescale}{%
-\subsection{Timescale}\label{timescale}}
+\subsection{Timescale}\label{timescale}
 
-\includegraphics{./figs/liferockystartstrip.jpeg}
+\pandocbounded{\includegraphics[keepaspectratio]{./figs/liferockystartstrip.jpeg}}
 
 \begin{longtable}[]{@{}llllll@{}}
-\toprule()
+\toprule\noalign{}
 4.5 BYA & 4.3 BYA & 3.8 BYA & 3.5 BYA & 540 MYA & 520 MYA \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 & & & & & \\
-\bottomrule()
 \end{longtable}
 
 (Source: naturedocumetaries.org)
@@ -1619,8 +1561,7 @@ However, volcanic activity came to the rescue by producing greenhouse gasses and
 
 In less than 20 million years (MY) Earth radically changed again and turned into Green Earth (520 MYA). There was an explosion of life, and life suddenly evolved from being mainly unicellular to complex multicellular forms.
 
-\hypertarget{evolution}{%
-\section{Evolution}\label{evolution}}
+\section{Evolution}\label{evolution}
 
 How does the evolution of LUCA to all species of the tree of life occurred?
 
@@ -1630,8 +1571,7 @@ The groundbreaking work of Margulis, however, shed new light on evolution. Accor
 
 In this section we first focus on the principles of variation and selection. We will then continue with endosymbiosis and symbiogenesis. We conclude this section with elaborating on the concept of teleonomy.
 
-\hypertarget{variability-and-selection}{%
-\subsection{Variability and Selection}\label{variability-and-selection}}
+\subsection{Variability and Selection}\label{variability-and-selection}
 
 Variation occurs, among others, through errors in the copying of DNA for cell division of prokaryotic cells and gamete\footnote{Gamete: sperm or egg cell} production for eukaryotic cells (see Figure \ref{fig:dnaPolymerase}).
 
@@ -1689,22 +1629,19 @@ The odds on fixation of the mutation thus depends on the reproductive success.
 
 The process of genetic variation and selection can eventually lead to evolution of new species upon many generations.
 
-\hypertarget{genetic-drift}{%
-\subsection{Genetic Drift}\label{genetic-drift}}
+\subsection{Genetic Drift}\label{genetic-drift}
 
 Another important process for the origin of species is genetic drift. This are random fluctuations of alleles, which are particular sequence variants of a gene. Genetic drift is particularly strong in small populations. As opposed to selection it is not adaptive.
 
 New species will thus originate more quickly when a small fraction of the population gets isolated in a new environment.
 
-\hypertarget{horizontal-gene-transfer}{%
-\subsection{Horizontal Gene Transfer}\label{horizontal-gene-transfer}}
+\subsection{Horizontal Gene Transfer}\label{horizontal-gene-transfer}
 
 Horizontal gene transfer, which is non-sexual transfer of genetic information between two distinct organisms, is also important for the evolutionary process.
 
 This is very common between Prokaryota, i.e.~eubacteria and archaea bacteria, think on the super bugs in hospitals that acquired resistance to multiple antibiotics. It also occurs between Eukaryota. Mainly in protists, which are unicellular organisms with a nucleus. As well as between Prokaryota on the one hand and Eukaryota on the other hand.
 
-\hypertarget{endosymbiosis}{%
-\subsection{Endosymbiosis}\label{endosymbiosis}}
+\subsection{Endosymbiosis}\label{endosymbiosis}
 
 Niles Eldredge and Stephen Jay Gould have shown that the fossil record indicates that evolution happens in bursts: it is slow most of the time until suddenly rapid changes occur over a brief time \citep{margulis1999}. According to Lynn Margulis this can be explained by endosymbiosis, where one species starts to live within another species, which is a source of evolutionary novelty that can give rise to an explosion of novel life forms.
 
@@ -1786,8 +1723,7 @@ Margulis SET theory also supports a more intuitive organisation of the tree of l
 \caption{Two-part (eukaryotic vs prokaryotic) five kingdom taxonomy reflecting evolutionary history: prokaryotic bacteria and archae-bacteria evolved into eukaryotic Protista that further evolved into Plants, Fungae and animals (Source: wikipedia)}\label{fig:fiveKingdoms}
 \end{figure}
 
-\hypertarget{symbiosis-and-symbiogenesis}{%
-\subsection{Symbiosis and Symbiogenesis}\label{symbiosis-and-symbiogenesis}}
+\subsection{Symbiosis and Symbiogenesis}\label{symbiosis-and-symbiogenesis}
 
 This section is largerly based on Margulis' book ``The symbiotic Planet'' \citep{margulis1999}.
 
@@ -1803,8 +1739,7 @@ Once soil is available, plants can take over and again plant life crucially depe
 
 Similar examples hold for animals. Ruminants, e.g.~cattle, sheep, antelopes, deer, giraffes, and their relatives, for instance would never have evolved without their symbiosis with cellulose degrading protists that enable them to digest grass. The same holds for us humans, the symbiosis with the microorganisms in our gut, our gut microbiome, is crucial for us to digest our food.
 
-\hypertarget{teleonomy}{%
-\subsection{Teleonomy}\label{teleonomy}}
+\subsection{Teleonomy}\label{teleonomy}
 
 Teleonomy is the quality of apparent purposefulness and of goal-directedness of structures and functions in living organisms brought about by evolutionary adaptation. So throughout evolutionary history, there was never a purpose to develop a particular trait other than the primitive goal to maintain and reproduce the species.
 
@@ -1875,8 +1810,7 @@ Margulis' take on this is nicely summarised in the following quote: ``more compl
 So, all these arguments make clear that evolution has no direction.
 Instead, we can view evolution as a wonderful creative process that is generating novel life forms that are well adapted to their ever changing environment. So this insight on evolution invites us to deeply embrace the wealth of diversity, instead.
 
-\hypertarget{evolution-humanity-and-biodanza}{%
-\section{Evolution, Humanity and Biodanza}\label{evolution-humanity-and-biodanza}}
+\section{Evolution, Humanity and Biodanza}\label{evolution-humanity-and-biodanza}
 
 First there was
 
@@ -1900,8 +1834,7 @@ First there was
 
 Indeed, our upright walking life style gave our hands a new freedom that allowed us homonids to make and use tools and weapons. This stimulated rapid brain development that eventually gave rise to the evolution of language and human consciousness, which is closely entwined with the evolution of technology and social relations \citep{capraLuisi2014}.
 
-\hypertarget{consciousness}{%
-\subsection{Consciousness}\label{consciousness}}
+\subsection{Consciousness}\label{consciousness}
 
 With this evolution a second type of consciousness arose, which is referred to as extended consciousness (see e.g. \citet{capraLuisi2014}). So on the one hand we have primary consciousness that is the cognitive process that is accompanied by basic perceptual, sensory and emotional experience, which gives an organism a sense of self here and now, and, is widespread among living organisms. On the other hand, extended consciousness involves a more elaborate self-awareness, an experience of identity, the ability for reflection and to hold mental images, which eventually enabled us to formulate values, beliefs, goals and strategies. From the evolution of language not only an inner world of concepts and ideas emerged but also a social world with organised relationships and culture \citep{capraLuisi2014}.
 
@@ -1914,8 +1847,7 @@ Our self, however, is a mental image, which is very nicely worded by Brad Blanto
 
 This has also been confirmed in scientific experiments. \citet{Kahneman2012}, for instance, showed in his cold water experiments that we have an experiencing self, which refers to our primary consciousness that resides in the ocean of experiences, and, a remembering or narrative self associated with our extended consciousness that can create mental images and memories of our experiences, which both play an important role in our decision making. In these experiments he exposed people to two treatments. In one treatment, a person's hand was immersed in cold water at 14 degrees for 1 minute. In the other treatment, he immersed their hand in water at 14 degrees for 1 minute, which is as annoying as the first treatment, and then the water temperature was raised to 15 degrees, which is only slightly less annoying, for an additional 30 seconds. Our experiencing self would never consider that extending the treatment with an episode of slightly warmer water makes the whole episode more appealing. But, when people were asked almost everyone preferred the longer treatment where the water is less cold at the end. Storing experiences happens according to a peak/end rule, i.e.~according to the maximum intensity of the experience and its ending, and, it is our remembering self that makes decisions. The peak/end rule is a heuristic that evolved biologically and allows us to quickly and efficiently store experiences without the burden to remember every instant of the entire episode. This rule works very well in general, however, it can lead to peculiar choices in specific situations.
 
-\hypertarget{thinking-fast-and-slow}{%
-\subsection{Thinking fast and slow}\label{thinking-fast-and-slow}}
+\subsection{Thinking fast and slow}\label{thinking-fast-and-slow}
 
 In his book Thinking, Fast and Slow \citet{Kahneman2012} also discusses many other heuristics that lays at the heart of our decision-making. Indeed, he pointed out that we have two systems, a fast system and a slow system.
 
@@ -1923,8 +1855,7 @@ Fast thinking happens when facing problems that comes to mind automatically, e.g
 
 Slow thinking involves mental work and happens when we face problems for which the solution does not come to mind or that do not seem trivial. It is strongly associated with our extended consciousness. Note, however, that Kahneman points out that our slow thinking is also embodied. Indeed, during the slow thinking process our muscles tense up, our blood pressure rises, our heart rate increases and our pupils dilate, among others. Although many humans experience themselves as independent individuals who make their decisions in a rational and well thought out way, \citet{Kahneman2012} further argues that the majority of our decision making happens through fast thinking.
 
-\hypertarget{implications-for-our-well-being-and-biodanza}{%
-\subsection{Implications for our well-being and Biodanza}\label{implications-for-our-well-being-and-biodanza}}
+\subsection{Implications for our well-being and Biodanza}\label{implications-for-our-well-being-and-biodanza}
 
 It is thus important for our well-being to be well connected to our instincts and emotions. Indeed, as Rolando Toro pointed out, our instincts and emotions are the result of million of years of evolution. They are a shared cognition that has been differentiated, shaped to maintain and reproduce our species, and are the result of the environments and evolutionary development that our ancestors, i.e.~humans and other species from which we evolved, underwent up to this point.
 
@@ -1934,8 +1865,7 @@ With Biodanza we strengthen our identity and with exercises evoking biological r
 
 Now that we introduced how all species could evolve from their last universal common ancestor and touched upon some specific evolutionary aspects of our human species, we are ready to make the transition to how we humans evolve in our life span. This is also referred to as ontology, which is a another crucial biological aspect in the Model of Biodanza and is our focus in the next chapter.
 
-\hypertarget{ontogenesis}{%
-\chapter{Ontogenesis}\label{ontogenesis}}
+\chapter{Ontogenesis}\label{ontogenesis}
 
 In the upper part of the model, we see the biological aspect ``ontogenesis'' indicated with the red box in Figure \ref{fig:modelOnto}, which is our focus in this chapter.
 
@@ -1958,10 +1888,11 @@ Indeed, our phenotype, i.e.~our observable traits and characteristics, stem from
 
 Key questions that arise in this respect is how cells of different tissues of the same organism that share the same genetic code can be morphologically so distinct, and how the environment and changes in our environment can impact our phenotype?
 
-This is due to epigenetics! And, epigenetics is also the missing link that Rolando Toro needed to explain how Biodanza can provide an enriched environment that induces organic and cellular renewal, affective re-education and relearning of the original functions of life.
+This is due to epigenetics! And, epigenetics was the missing link that Rolando Toro needed to explain how Biodanza can provide an enriched environment that induces organic and cellular renewal, affective re-education and relearning of the original functions of life. A very compelling hypothesis, which he formulated at the end of his life.
 
-\hypertarget{epigenetics}{%
-\section{Epigenetics}\label{epigenetics}}
+In this chapter, I introduce the concept of epigenetics and I will discuss references in the scientific literature that can help us to understand the rationale of Rolando's hypothesis. Note, however, that we cannot interpret these references as scientific proof for the role of epigenetics in Biodanza, as epigenetics effects of Biodanza have never been studied experimentally.
+
+\section{Epigenetics}\label{epigenetics}
 
 Epigenetics is the study of how development, behavior and environment can cause changes that affect the way we use our genes. Unlike genetic changes, epigenetic changes do not change our DNA sequence, but they can change how our body can (or cannot) read our genes.
 
@@ -1980,7 +1911,7 @@ Epigenetics has a large impact on our biology. Our brain and muscle cells for in
 
 The major epigenetic changes occur during embryonic development. In a fertilized egg cell all our genes are more or less accessible. However, as the embryo develops, cells differentiate into brain cells, muscle cells, nerve cells, liver cells etc. This differentiation happens through the addition or removal of epigenetic marks, and this is triggered by differences in the hormone concentration throughout the embryo and by the signals that a cell receives from its neighboring cells.
 
-This brings us to a very important point of epigenetics for Biodanza: epigenetics is largely influenced by the environment. Not only the neighboring cells have an impact on the developing embryo, but also mother's food, smoking behavior and stress levels among others, that are passed through her bloodstream to the developing fetus and have an epigenetic impact that will determine how the fetus will use their genes in their adult life. Even more interesting for Biodanza is that the epigenetic process continuous after birth. This is particularly so for our brains that keep on growing and developing throughout our lives, and again the interaction with our environment is key.
+This brings us to a very important point of epigenetics: epigenetics is largely influenced by the environment. Not only the neighboring cells have an impact on the developing embryo, but also mother's food, smoking behavior and stress levels among others, that are passed through her bloodstream to the developing fetus and have an epigenetic impact that will determine how the fetus will use their genes in their adult life. Even more interesting for Biodanza is that the epigenetic process continuous after birth. This is particularly so for our brains that keep on growing and developing throughout our lives, and again the interaction with our environment is key.
 
 In rats, for instance, maternal grooming and nursing behavior has been shown to have a major impact on the so-called ``hypothalamic--pituitary--adrenal (HPA) stress and defensive response of adult rats \citep{Meaney2004}. Well nurtured adult rats behave less fearful under conditions of stress and have a more active exploratory behavior when they are placed in novel environments. This through their epigenome of the glucocorticoid receptor (GR) in the hippocampus that is affected by their mother-pup contact in the first week of their lives. The epigenome of the well nurtured rats enables higher expression levels of the GR in their adult life, which is known to dampen their HPA stress response \citep{Meaney2004, Meaney2005}. Interestingly, these findings have been translated to humans, where similar effects on the GR epigenome were observed in post-mortem human adult brain tissue between people that had a normal childhood and people with a history of child abuse \citep{Meaney2009}. The authors also showed in rats that these epigenetic marks established early in life through behavioral programming, were reversible in the adult brain \citep{Meaney2005}.
 
@@ -1990,8 +1921,7 @@ In human twins study an association has been found between physical exercise and
 
 In the remainder of this chapter, we will dive deeper in the fascinating realm of epigenetics. We will introduce epigenetic markers and illustrate the role of epigenetics in embryonic development, learning, ageing and stress.
 
-\hypertarget{epigenetic-markers}{%
-\section{Epigenetic markers}\label{epigenetic-markers}}
+\section{Epigenetic markers}\label{epigenetic-markers}
 
 Epigenetic markers are small molecules that interact either directly with the DNA or with histones, which are specific proteins that act as spools that wind the long DNA molecule in a more compact/condense form (see Figure \ref{fig:epigenetics}).
 They can make genes accessible or inaccessible for RNA transcription and thus eventually for the production of proteins. Two common types are
@@ -2017,8 +1947,7 @@ Both types can impact the activity of genes.
 On the one hand DNA methylation actively represses the expression of a specific gene, while DNA demethylation enhances gene expression.
 On the other hand histone acetylation makes the structure of a region of DNA more open and thus more accessible for transcription of the genes in that region, while de-acetylation has the opposite effect.
 
-\hypertarget{epigenetics-during-embryonal-development}{%
-\section{Epigenetics during Embryonal Development}\label{epigenetics-during-embryonal-development}}
+\section{Epigenetics during Embryonal Development}\label{epigenetics-during-embryonal-development}
 
 Epigenetics plays an important role in embryonic development (see Figure \ref{fig:epiEmbryo}).
 
@@ -2035,8 +1964,7 @@ Epigenetics plays an important role in embryonic development (see Figure \ref{fi
 
 CpG islands are regions in our DNA that can be heavily methylated. They are major regulatory units and around 70\% of our genes have CpG islands in their promotor regions\footnote{A promoter is a sequence of DNA to which proteins bind to initiate transcription of the gene downstream of the promotor}. Methylation of the promotor region is typically associated with a reduction of gene expression. In Figure \ref{fig:epiEmbryo} we observe that the CpG islands of a sperm cell are almost fully methylated, which indicates that many genes are likely to be silenced. The CpG islands of an egg cell are methylated around 50\%. Upon fertilization the methylation drops in the blastocyst (an early stage of embryonic development, about five days upon fertilization). This is required for the cells to regain the property that they can divide and differentiate to all cell-types of the developing organism. As differentiation of the cells starts and as they evolve into tissues, methylation increases again so that the cells have access to less genes and get more specific functions. Note, that the methylation status is also passed upon cell division, which leads to invariance of differentiated cells: indeed, a muscle cell remains a muscle cell upon division and a brain cell a brain cell, etc.
 
-\hypertarget{epigenetics-and-learning}{%
-\section{Epigenetics and Learning}\label{epigenetics-and-learning}}
+\section{Epigenetics and Learning}\label{epigenetics-and-learning}
 
 This section is largely based on the review article of Creighton et al.~entitled ``Epigenetic Mechanisms of Learning and Memory: Implications for Ageing'' \citep{Creighton2020}.
 
@@ -2048,8 +1976,7 @@ Learning typically happens in waves. Genes activated shortly after learning retu
 In the second wave, genes are included that encode for epigenetic regulators.
 So, the first wave within 6 hours upon learning is known to up regulate transcription factors important to initiate the second wave of transcription, which is needed to establish long-lasting memories.
 
-\hypertarget{dna-methylation-and-memory}{%
-\subsection{DNA Methylation and Memory}\label{dna-methylation-and-memory}}
+\subsection{DNA Methylation and Memory}\label{dna-methylation-and-memory}
 
 In a large number of studies, DNA methylation has been shown to play an important role in multiple stages of memory formation.
 
@@ -2079,8 +2006,7 @@ A large body of literature support the role of methylation in learning and it is
 \caption{Brain regions involved in memory formation. (Source: Wikipedia)}\label{fig:brainRegionsLearning}
 \end{figure}
 
-\hypertarget{histone-modifications-and-memory}{%
-\subsection{Histone Modifications and Memory}\label{histone-modifications-and-memory}}
+\subsection{Histone Modifications and Memory}\label{histone-modifications-and-memory}
 
 Another type of epigenetic regulation is through the modification of histones, i.e.~the proteins that act as spools around which the long DNA molecule is winded and which can affect the accessibility of a DNA region upon modification.
 
@@ -2090,8 +2016,7 @@ Histone epigenetic markers seem to regulate the transcriptional sensitivity towa
 
 So recent progress has shown the tremendous importance of epigenetics for brain development and learning, however, the field of neuro-epigenetics is still in its infancy and many open questions remain.
 
-\hypertarget{epigenetics-and-aging}{%
-\section{Epigenetics and Aging}\label{epigenetics-and-aging}}
+\section{Epigenetics and Aging}\label{epigenetics-and-aging}
 
 Epigenetics are also largely driven by ecofactors. This can be nicely illustrated with identical twins who have almost the same genome\footnote{Identical twins have almost exactly the same genome, only very small differences have been build up in the womb}. It gets more easy to tell them apart over time due to epigenetic changes that are triggered by the different environments to which they were exposed and that effectively changed how they are using their genes. A good example is the difference in skin ageing between twins that had a different exposure to UV radiation (e.g.~Figure \ref{fig:epiUV}).
 
@@ -2137,8 +2062,7 @@ Multiple studies showed that telomeric and subtelomeric regions contain histone 
 Here, the epigenetic modification does not induce changes in the expression of target genes but affects telomere length or telomere structure.
 Moreover, genes involved in the production of telomerase also have been shown to be under the regulation of methylation.
 
-\hypertarget{epigenetics-and-enriched-environment}{%
-\section{Epigenetics and Enriched Environment}\label{epigenetics-and-enriched-environment}}
+\section{Epigenetics and Enriched Environment}\label{epigenetics-and-enriched-environment}
 
 Interestingly for Biodanza, also a large body of literature exists on the impact of enriched environments on neuroplasticity and brain aging in rodents.
 
@@ -2152,8 +2076,7 @@ In another study, \citet{grinan2016} showed in SAMP8 mice, a mouse strain with a
 
 These studies, amongst others, highlighted the benefical effects of environmental enrichment on hippocampal plasticity through DNA methylation and showed that specific aspects of brain aging can be counteracted by lifestyle interventions.
 
-\hypertarget{epigenetics-and-stress}{%
-\section{Epigenetics and Stress}\label{epigenetics-and-stress}}
+\section{Epigenetics and Stress}\label{epigenetics-and-stress}
 
 Epigenetics also have been shown to be a key mechanism by which stressors interact with the genome.
 This leads to stable changes in DNA structure, gene expression, and behavior (e.g. \citet{Park2019}).
@@ -2166,22 +2089,23 @@ They introduce many compelling examples and study results that underpin that age
 
 \citet{BlackburnEpel2017} also discuss studies where it was shown that mind-body techniques such as meditation, qigong and yoga, among others are stress reducing, have positive effects on our well-being, can prevent inflammation and can induce cell rejuvenation by (re-)activating the gene that is encoding for teleomerase, among others. These effects were observed in well designed experiments and are in line with the beneficial effects that Rolando Toro also envisioned to induce through his System of Biodanza.
 
-\hypertarget{ontogenesis-in-the-model-biodanza}{%
-\section{Ontogenesis in the Model Biodanza}\label{ontogenesis-in-the-model-biodanza}}
+\section{Ontogenesis in the Model Biodanza}\label{ontogenesis-in-the-model-biodanza}
 
-So epigenetics represents the scientific explanation for Ontogenesis in the Rolando Toro's System of Biodanza. Indeed, with a quote of Rolando ``Es que en la epigénesis
+So, Rolando Toro hypothesized that epigenetics is an important driver for Ontogenesis in the his System of Biodanza. Indeed, with a quote of Rolando ``Es que en la epigénesis
 se permite o no la expresión de los genes existentes'' \citep{Montanari2023}. So, it is through epigenetics that the expression of existing genes is allowed or not.
 
 Hence, our ontogenesis, the formation of our phenotype, does not directly stem from our genome, but is the result of the modulation mechanism on our genome, i.e.~the activation and inhibition of the expression of our genes we inherited from our parents.
 
-Rolando further argued that ``We have many genes that are not good (\ldots) It is epigenetics, through the enriched environment, that prevents or allows the expression of some aspects of the genetic code (\ldots) Sometimes the environment does not block the malignant genes, then the pathology appears'' \citep{Montanari2023}. With this respect practicing Biodanza can be seen as a regular administration of stimuli through vivencia that trigger changes and repairs necessary to rebalance our biological system from the damage caused by our toxic experiences and the attacks of pathogenic agents \citep{Montanari2023}.
+Rolando further argued that ``We have many genes that are not good (\ldots) It is epigenetics, through the enriched environment, that prevents or allows the expression of some aspects of the genetic code (\ldots) Sometimes the environment does not block the malignant genes, then the pathology appears'' \citep{Montanari2023}. With this respect he hypothesized that practicing Biodanza can be seen as a regular administration of stimuli through vivencia that trigger changes and repairs necessary to rebalance our biological system from the damage caused by our toxic experiences and the attacks of pathogenic agents \citep{Montanari2023}.
 
-In this chapter we introduced the biological angle of ontogenesis with which we conclude the biological aspects of the Model of Biodanza. Here, we focused exclusively on the pure biological component of ontogenesis. Note, however, that it is not our intention to reduce ontogenesis in the model of Biodanza to these biological aspects, only. Indeed, the biological development of an individual takes place in a larger field as it also involves an important social, psychological and emotional component because an important part of human life takes place in the symbolic social domain.
+In this chapter we introduced the biological angle of ontogenesis with which we conclude the biological aspects of the Model of Biodanza.
+Note, once again, that the scientific papers that were referenced in this chapter can help us to understand Rolando Toro's hypothesis that epigenetics is involved in the ontogenesis of Biodanza. However, they cannot be seen as scientific proof of this hypothesis as to date no empirical research has been conducted to the epigenetic effects of Biodanza.
+
+In this chapter, we also focused exclusively on the pure biological component of ontogenesis. Importantly, however, it is not our intention to reduce ontogenesis in the model of Biodanza to these biological aspects, only. Indeed, the biological development of an individual takes place in a larger field as it also involves an important social, psychological and emotional component because an important part of human life takes place in the symbolic social domain.
 
 This larger and important intersection of the life sciences, physiology, anthropology, sociology, psychology, art and mysticism is well beyond the scope of this monograph. It is in this larger field that Rolando was operating when he developed his system of Biodanza.
 
-\hypertarget{concluding-remarks}{%
-\chapter{Concluding Remarks}\label{concluding-remarks}}
+\chapter{Concluding Remarks}\label{concluding-remarks}
 
 My writing was my humble attempt to convey my passion for the system of Biodanza and vibrating it to you. I hope that I was able to bring the message across
 
@@ -2202,25 +2126,19 @@ My writing was my humble attempt to convey my passion for the system of Biodanza
 
 These insights makes a biocentric world view very natural, which was Rolando's starting point when he developed his system of Biodanza. With Biodanza he envisioned to create an enriched environment with regular administration of stimuli through vivencia that can rebalance our biological system and can have a large impact on our ontogenesis.
 
-Indeed, vivencia has a strong impact on our body and brain. The sensations that we experience have a physiological impact through the modulation of our genes that encode for a diverse scala of proteins, hormones and neurotransmitters.
-
 Vivencia also have the quality that they immediately access our embodied mind through experience that precedes our extended consciousness. So it enables us to learn by strong experiences that directly tap into our personal, collective and vital unconsciousness.
-
-These transformative experiences through vivencia can be imprinted by epigenetics, which can induce important changes at a physiological level and also is a driver for mechanisms of learning and memory.
 
 Indeed, as Biodanza practitioners we are familiar with the long lasting memories to deep vivencia, and with how practicing Biodanza also induces change.
 Change in how we feel, stand in life, interact socially and with our environment.
 
 I also hope that this monograph will trigger you to continue on your Biodanza path with even more enthusiasm. Indeed, it is a unique path to promote your ontogenesis and well-being, and it invites you to reconnect with yourself, the others, and the entire world surrounding you. Moreover, it might also change the larger autopoietic social system in which you are embedded. And this, as Rolando Toro envisioned, by effectively switching it to another attractor through its positive feedback on your change, growth and interaction.
 
-\hypertarget{addendum}{%
-\chapter*{Addendum}\label{addendum}}
+\chapter*{Addendum}\label{addendum}
 \addcontentsline{toc}{chapter}{Addendum}
 
 Below you will find some additional texts and impressions that I have written during my Biodanza teacher training.
 
-\hypertarget{reflection-on-my-first-biodanza-retreat-with-annette-heynderickx-in-buirefontaine}{%
-\section*{Reflection on my first Biodanza retreat with Annette Heynderickx in Buirefontaine}\label{reflection-on-my-first-biodanza-retreat-with-annette-heynderickx-in-buirefontaine}}
+\section*{Reflection on my first Biodanza retreat with Annette Heynderickx in Buirefontaine}\label{reflection-on-my-first-biodanza-retreat-with-annette-heynderickx-in-buirefontaine}
 \addcontentsline{toc}{section}{Reflection on my first Biodanza retreat with Annette Heynderickx in Buirefontaine}
 
 Heel onverwachts en op de valreep verschenen we met zijn twee op Buirefontaine.\\
@@ -2275,12 +2193,10 @@ het anagram werkt door \ldots{}
 
 Fien \& Lieven - Juli 2020
 
-\hypertarget{poetic-impressions-of-some-vivencia}{%
-\section*{Poetic impressions of some vivencia}\label{poetic-impressions-of-some-vivencia}}
+\section*{Poetic impressions of some vivencia}\label{poetic-impressions-of-some-vivencia}
 \addcontentsline{toc}{section}{Poetic impressions of some vivencia}
 
-\hypertarget{de-fysiologische-loop}{%
-\subsection*{De fysiologische loop}\label{de-fysiologische-loop}}
+\subsection*{De fysiologische loop}\label{de-fysiologische-loop}
 \addcontentsline{toc}{subsection}{De fysiologische loop}
 
 Mijn bewustzijn zakt\\
@@ -2294,8 +2210,7 @@ Het doen\\
 wordt langzaam\\
 zijn.
 
-\hypertarget{ritmische-couxf6rdinatie}{%
-\subsection*{Ritmische coördinatie}\label{ritmische-couxf6rdinatie}}
+\subsection*{Ritmische coördinatie}\label{ritmische-couxf6rdinatie}
 \addcontentsline{toc}{subsection}{Ritmische coördinatie}
 
 Met mijn hand voel ik de ander\\
@@ -2308,8 +2223,7 @@ We kleuren samen.\\
 En na de wissels\\
 regenbogen.
 
-\hypertarget{lopen-met-vastberadenheid}{%
-\subsection*{Lopen met vastberadenheid}\label{lopen-met-vastberadenheid}}
+\subsection*{Lopen met vastberadenheid}\label{lopen-met-vastberadenheid}
 \addcontentsline{toc}{subsection}{Lopen met vastberadenheid}
 
 Ik voel de muziek\\
@@ -2329,8 +2243,7 @@ vanuit ontspanning.\\
 En dat Groot-Zijn\\
 zindert na.
 
-\hypertarget{de-ontmoeting}{%
-\subsection*{De ontmoeting}\label{de-ontmoeting}}
+\subsection*{De ontmoeting}\label{de-ontmoeting}
 \addcontentsline{toc}{subsection}{De ontmoeting}
 
 Vanuit dat Groot-Zijn\\
@@ -2353,8 +2266,7 @@ Diep geraakt\\
 gaan we in omhelzing\\
 en we voelen na.
 
-\hypertarget{fluuxefditeit-in-compacte-groep}{%
-\subsection*{Fluïditeit in compacte groep}\label{fluuxefditeit-in-compacte-groep}}
+\subsection*{Fluïditeit in compacte groep}\label{fluuxefditeit-in-compacte-groep}
 \addcontentsline{toc}{subsection}{Fluïditeit in compacte groep}
 
 Ik voel en beweeg.\\
@@ -2413,8 +2325,7 @@ en roept\\
 van zodra muziek\\
 en dans weerklinkt.
 
-\hypertarget{minotaurus}{%
-\subsection*{Minotaurus}\label{minotaurus}}
+\subsection*{Minotaurus}\label{minotaurus}
 \addcontentsline{toc}{subsection}{Minotaurus}
 
 Jij Minotaurus,\\
